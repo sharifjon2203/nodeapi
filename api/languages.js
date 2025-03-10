@@ -10,8 +10,9 @@ export default async function handler(req, res) {
   }
 
   const { sl, dl, text } = req.query;
+  const pathname = new URL(req.url, `http://${req.headers.host}`).pathname;
 
-  if (req.url.startsWith("/languages")) {
+  if (pathname === "/api/languages") {
     try {
       const response = await fetch("https://ftapi.pythonanywhere.com/languages");
       const data = await response.json();
@@ -21,7 +22,7 @@ export default async function handler(req, res) {
     }
   }
 
-  if (req.url.startsWith("/translate")) {
+  if (pathname === "/api/translate") {
     if (!dl || !text) {
       return res.status(400).json({ error: "Missing required parameters: dl and text" });
     }
