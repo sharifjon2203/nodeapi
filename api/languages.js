@@ -27,9 +27,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing required parameters: dl and text" });
     }
     
-    const apiUrl = sl
-      ? `https://ftapi.pythonanywhere.com/translate?sl=${sl}&dl=${dl}&text=${encodeURIComponent(text)}`
-      : `https://ftapi.pythonanywhere.com/translate?dl=${dl}&text=${encodeURIComponent(text)}`;
+    const apiUrl = `https://ftapi.pythonanywhere.com/translate?sl=${sl}&dl=${dl}&text=${encodeURIComponent(text)}`
     
     try {
       const response = await fetch(apiUrl);
